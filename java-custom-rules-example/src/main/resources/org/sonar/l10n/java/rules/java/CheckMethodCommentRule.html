@@ -1,0 +1,28 @@
+<p>This rule detects invalid Method comment</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+	/**
+	 * Carry out business scenarios for each event
+	 * Branch processing of all events occurring in ALPS-MoneyMgmt system work
+	 * 
+	 * @param e Event
+	 * @return EventResponse
+	 * @exception EventException
+	 */
+	public EventResponse perform(Event e) throws EventException {
+		return eventResponse;
+	}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+	/**
+	 * ESM_DOU_0108 : [Event]
+	 * [Act] for [Business Target].
+	 * This method is used for searching Summary data  
+	 * @param Event e
+	 * @return EventResponse
+	 * @exception EventException
+	 */
+	private EventResponse searchSummaryVO(Event e) throws EventException {
+	}
+</pre>
