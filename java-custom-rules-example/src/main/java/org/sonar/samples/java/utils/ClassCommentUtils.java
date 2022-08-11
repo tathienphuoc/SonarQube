@@ -2,7 +2,7 @@ package org.sonar.samples.java.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -17,28 +17,28 @@ import org.sonar.plugins.java.api.tree.Tree;
 public class ClassCommentUtils {
 
 	private enum Type {
-		DESCRIPTION(Pattern.compile("^\\*\\s+[^@][a-zA-Z0-9]+.*$")),
+		INVALID_LINE(Pattern.compile("^[^\\*]|(\\*)\\S+")), DESCRIPTION(Pattern.compile("^\\*\\s+[^@][a-zA-Z0-9]+.*$")),
 		AUTHOR(Pattern.compile("^\\* @author\\s+[a-zA-Z]+\\S*\\s*$")),
 		INVALID_AUTHOR(Pattern.compile("\\*\\s*(@author).*$")), SEE(Pattern.compile("^\\* @see\\s+[a-zA-Z]+\\S*\\s*$")),
 		INVALID_SEE(Pattern.compile("\\*\\s*(@see).*$")), SINCE(Pattern.compile("^\\* @since(\\s+\\S+){2}\\s*$")),
-		INVALID_SINCE(Pattern.compile("\\*\\s*@since(\\s+\\S+){2,}\\s*$")), EMPTY_LINE(Pattern.compile("^\\*\\s*$")),
-		INVALID_LINE(Pattern.compile("^[^\\*].*"));
+		INVALID_SINCE(Pattern.compile("\\*\\s*@since(\\s+\\S+){2,}\\s*$")), EMPTY_LINE(Pattern.compile("^\\*\\s*$"));
 
 		private Pattern regex;
 
 		private String errMsg = "";
 
 		static {
-			INVALID_AUTHOR.errMsg = "INVALID_AUTHOR";
-			INVALID_SEE.errMsg = "INVALID_SEE";
-			INVALID_SINCE.errMsg = "INVALID_SINCE";
-			INVALID_LINE.errMsg = "INVALID_LINE";
-			EMPTY_LINE.errMsg = "INVALID EMPTY_LINE";
+
+			INVALID_AUTHOR.errMsg = CommonMessage.INVALID_AUTHOR_FORMAT;
+			INVALID_SEE.errMsg = CommonMessage.INVALID_SEE_FORMAT;
+			INVALID_SINCE.errMsg = CommonMessage.INVALID_SINCE_FORMAT;
+			INVALID_LINE.errMsg = CommonMessage.INVALID_LINE;
+			EMPTY_LINE.errMsg = CommonMessage.REMOVE_EMPTY_LINE;
 		}
 
-		public String getErrMsg(int lineNo) {
-			return "Line " + lineNo + ": " + this.errMsg;
-		}
+//		public String getErrMsg(int lineNo) {
+//			return "Line " + lineNo + ": " + this.errMsg;
+//		}
 
 		Type(Pattern s) {
 			this.regex = s;
@@ -58,11 +58,11 @@ public class ClassCommentUtils {
 		}
 	}
 
-	private static HashMap<Type, List<String>> classComments = new HashMap<>();
+	private static EnumMap<Type, ArrayList<String>> classComments = new EnumMap<>(Type.class);
 
 	private static void initClassComments() {
 		for (Type t : Type.values()) {
-			classComments.put(t, new ArrayList<String>());
+			classComments.put(t, new ArrayList<>());
 		}
 	}
 
@@ -71,18 +71,36 @@ public class ClassCommentUtils {
 				&& classComments.get(Type.SINCE).isEmpty();
 	}
 
+//	private static String getClassComments(ClassTree tree) throws Exception {
+//		List<SyntaxTrivia> classComments = tree.firstToken().trivias();
+//		if (classComments.isEmpty()) {
+//			return "";
+//		} else if (classComments.size() > 1) {
+//			throw new Exception(CommonMessage.TOO_MANY_CLASS_COMMENTS);
+//		} else {
+//			String classComment = classComments.get(0).comment();
+//			if (classComment.startsWith("/**") && classComment.endsWith("*/") && classComment.length() > 4) {
+//				return classComment;
+//			}
+//			throw new Exception(CommonMessage.INVALID_METHOD_COMMENTS_FORMAT);
+//		}
+//	}
+
 	private static String getClassComments(ClassTree tree) throws Exception {
 		List<SyntaxTrivia> classComments = tree.firstToken().trivias();
 		if (classComments.isEmpty()) {
-			return "";
+			throw new Exception(CommonMessage.ABSENT_CLASS_COMMENTS);
 		} else if (classComments.size() > 1) {
-			throw new Exception("Too many class comment");
+			throw new Exception(CommonMessage.TOO_MANY_CLASS_COMMENTS);
 		} else {
-			String classComment = classComments.get(0).comment();
-			if (classComment.startsWith("/**") && classComment.endsWith("*/")) {
-				return classComment;
+			String methodComment = classComments.get(0).comment();
+			if (methodComment.startsWith("/**") && methodComment.endsWith("*/") && methodComment.length() > 4) {
+				return methodComment;
 			}
-			throw new Exception("Class comment must be start with //** and end with *//");
+//			if (methodComment.startsWith("^\\/\\*\\*.*\\*\\/$")) {
+//				return methodComment;
+//			}
+			throw new Exception(CommonMessage.INVALID_CLASS_COMMENTS_FORMAT);
 		}
 	}
 
@@ -99,72 +117,106 @@ public class ClassCommentUtils {
 		}
 	}
 
-	public static String getFormatErrMsg(Tree tree) {
+	public static List<String> getFormatErrMsgs(Tree tree) {
 		initClassComments();
 		List<String> commentLines;
 		try {
 			commentLines = cleanLines(getClassComments((ClassTree) tree));
 		} catch (Exception e) {
-			return e.getMessage();
+			return Arrays.asList(e.getMessage());
 		}
-		StringBuilder errMsg = new StringBuilder();
-		if (commentLines.isEmpty()) {
-			errMsg.append("Class comments doesn't exist");
-			return errMsg.toString();
-		}
+		List<String> errMsgs = new ArrayList<>();
+//		if (commentLines.isEmpty()) {
+//			errMsg.append(CommonMessage.ABSENT_CLASS_COMMENTS);
+//			return errMsg.toString();
+//		}
 		for (int i = 0; i < commentLines.size(); i++) {
 			Type type = Type.getType(commentLines.get(i));
 			classComments.get(type).add(commentLines.get(i));
 			if (type.equals(Type.EMPTY_LINE)) {
 				if (!allowEmptyLine()) {
-					errMsg.append("\n" + type.getErrMsg(i + 1) + commentLines.get(i) + "\n");
+//					errMsg.append("\n" + type.getErrMsg(i + 1) + commentLines.get(i) + "\n");
+					errMsgs.add(type.errMsg);
 				}
 			} else {
 				if (!type.errMsg.isEmpty()) {
-					errMsg.append("\n" + type.getErrMsg(i + 1) + commentLines.get(i) + "\n");
+//					errMsg.append("\n" + type.getErrMsg(i + 1) + commentLines.get(i) + "\n");
+					errMsgs.add(type.errMsg);
 				}
 				if (!isOrderedLine(type)) {
-					errMsg.append("\nLine " + (i + 1) + commentLines.get(i) + " invalid order\n");
+//					errMsg.append("\nLine " + (i + 1) + commentLines.get(i) + " invalid order\n");
+					errMsgs.add(CommonMessage.INVALID_CLASS_ORDER_FORMAT);
 				}
 			}
 		}
-		return errMsg.toString();
+		return errMsgs;
 	}
 
-	public static String getDocErrMsg(Tree tree) {
-		StringBuilder errMsg = new StringBuilder();
-		errMsg.append(getFormatErrMsg(tree));
-		if (classComments.get(Type.DESCRIPTION).isEmpty() || classComments.get(Type.DESCRIPTION).get(0).isEmpty()) {
-			errMsg.append("Where is my des\n");
+	public static List<String> getDocErrMsgs(Tree tree) {
+		List<String> errMsgs = new ArrayList<>(getFormatErrMsgs(tree));
+//		errMsg.append(getFormatErrMsg(tree));
+		if (!errMsgs.isEmpty()) {
+			return errMsgs;
 		}
-		if (classComments.get(Type.EMPTY_LINE).isEmpty()) {
-			errMsg.append("Need at least one empty line after des");
+		if (classComments.get(Type.DESCRIPTION).isEmpty()) {
+			errMsgs.add(0, CommonMessage.ABSENT_DESCRIPTION);
+		} else if (classComments.get(Type.EMPTY_LINE).isEmpty()) {
+			errMsgs.add(0, CommonMessage.ABSENT_EMPTY_LINE);
 		}
 		if (classComments.get(Type.AUTHOR).isEmpty()) {
-			errMsg.append("no author \n");
+//			errMsg.append("no author \n");
+			errMsgs.add(CommonMessage.ABSENT_AUTHOR);
+		} else if (classComments.get(Type.AUTHOR).size() > 1) {
+			errMsgs.add(CommonMessage.TOO_MANY_AUTHOR);
 		}
 		if (classComments.get(Type.SEE).isEmpty()) {
-			errMsg.append("no see \n");
+//			errMsg.append("no see \n");
+			errMsgs.add(CommonMessage.ABSENT_SEE);
+		} else if (classComments.get(Type.SEE).size() > 1) {
+			errMsgs.add(CommonMessage.TOO_MANY_SEE);
 		}
 		if (classComments.get(Type.SINCE).isEmpty()) {
-			errMsg.append("no SINCE \n");
+//			errMsg.append("no SINCE \n");
+			errMsgs.add(CommonMessage.ABSENT_SINCE);
+		} else if (classComments.get(Type.SINCE).size() > 1) {
+			errMsgs.add(CommonMessage.TOO_MANY_SINCE);
 		}
-		return errMsg.toString();
+
+		return errMsgs;
 	}
 
+//	private static List<String> cleanLines(@Nullable String javadoc) {
+//		if (javadoc == null) {
+//			return Collections.emptyList();
+//		}
+//		String trimmedJavadoc = javadoc.trim();
+//		if (trimmedJavadoc.length() <= 4) {
+//			// Empty or malformed javadoc. for instance: '/**/'
+//			return Collections.emptyList();
+//		}
+//		// remove start and end of Javadoc as well as stars
+//		String[] lines = trimmedJavadoc.substring(3, trimmedJavadoc.length() - 2).replaceAll("(?m)^\\s*", "").trim()
+//				.split("\\r?\\n");
+//		return Arrays.stream(lines).map(String::trim).collect(Collectors.toList());
+//	}
 	private static List<String> cleanLines(@Nullable String javadoc) {
-		if (javadoc == null) {
-			return Collections.emptyList();
-		}
+//		if (javadoc == null) {
+//			return Collections.emptyList();
+//		}
 		String trimmedJavadoc = javadoc.trim();
-		if (trimmedJavadoc.length() <= 4) {
-			// Empty or malformed javadoc. for instance: '/**/'
-			return Collections.emptyList();
-		}
+//		if (trimmedJavadoc.length() <= 4) {
+//			// Empty or malformed javadoc. for instance: '/**/'
+//			return Collections.emptyList();
+//		}
 		// remove start and end of Javadoc as well as stars
 		String[] lines = trimmedJavadoc.substring(3, trimmedJavadoc.length() - 2).replaceAll("(?m)^\\s*", "").trim()
 				.split("\\r?\\n");
-		return Arrays.stream(lines).map(String::trim).collect(Collectors.toList());
+//		List<String> cleanLines = Arrays.stream(lines).map(String::trim).collect(Collectors.toList());
+//		if (cleanLines.size() == 1 && cleanLines.get(0).isEmpty()) {
+//			return Collections.emptyList();
+//		}
+//		return cleanLines;
+		return Arrays.stream(lines).map(String::trim).filter(l -> !l.isEmpty()).collect(Collectors.toList());
 	}
 
 }

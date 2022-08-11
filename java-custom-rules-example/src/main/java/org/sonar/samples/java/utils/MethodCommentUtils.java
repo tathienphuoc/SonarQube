@@ -27,7 +27,6 @@ public class MethodCommentUtils {
 		EXCEPTION(Pattern.compile("^\\* (@throws|@exception)\\s+[a-zA-Z]+\\s*$")),
 		INVALID_EXCEPTION(Pattern.compile("\\*\\s*(@throws|@exception).*$")), EMPTY_LINE(Pattern.compile("^\\*\\s*$"));
 
-//		INVALID_LINE(Pattern.compile("^[^\\*]|(\\*)\\S+"));
 //		INVALID_LINE(Pattern.compile("^[^\\*].*"));
 		private Pattern regex;
 
@@ -151,7 +150,7 @@ public class MethodCommentUtils {
 		return context.getFileLines().get(lineNo - 1);
 	}
 
-	public static List<String> getDocErrMsg(JavaFileScannerContext context, MethodTree tree) {
+	public static List<String> getDocErrMsgs(JavaFileScannerContext context, MethodTree tree) {
 		MethodCommentUtils.context = context;
 		List<String> errMsgs = new ArrayList<>(getFormatErrMsgs(tree));
 		if (!errMsgs.isEmpty()) {

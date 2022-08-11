@@ -4,12 +4,16 @@
  */
 package org.sonar.samples.java.checks;
 
+import java.util.List;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.ClassTree;
+import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.samples.java.utils.ClassCommentUtils;
+import org.sonar.samples.java.utils.MethodCommentUtils;
 
 @Rule(key = "CheckClassCommentRule")
 public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileScanner {
@@ -24,10 +28,13 @@ public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileSc
 
 	@Override
 	public void visitClass(ClassTree tree) {
-		String errMsg = ClassCommentUtils.getDocErrMsg(tree);
-		if (!errMsg.isEmpty()) {
-			context.reportIssue(this, tree, errMsg);
-//			System.out.println(errMsg);
+		List<String> errMsgs = ClassCommentUtils.getDocErrMsgs(tree);
+		for(int i=0;i<errMsgs.size();i++) {
+			context.reportIssue(this, tree, errMsgs.get(i));
+			System.out.println( errMsgs.get(i));
+		}
+		if(errMsgs.isEmpty()) {
+			System.out.println("ok");
 		}
 	}
 }

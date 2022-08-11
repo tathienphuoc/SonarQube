@@ -6,9 +6,9 @@ import org.sonar.java.checks.verifier.CheckVerifier;
 class CheckClassCommentTest {
 	@Test
 	void testClassComment() {
-//	    CheckVerifier.newVerifier()
-//	      .onFile("src/test/files/CheckMethodCommentTestRule.java")
-//	      .withCheck(new CheckClassCommentRule())
-//	      .verifyIssues();
+	    CheckVerifier.newVerifier()
+	      .onFile("src/test/files/CheckClassCommentTestRule.java")
+	      .withCheck(new CheckClassCommentRule())
+	      .verifyIssues();
 	}
 }

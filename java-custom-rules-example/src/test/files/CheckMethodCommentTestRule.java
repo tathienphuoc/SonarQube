@@ -18,13 +18,12 @@ class MyClass {
 	 * 
 	 * @param List<ArrayList<String>>   e
 	 * @param int                       b
-	 * @return HashMap<String,List<ABC>> 
+	 * 
 	 * @param HashMap<String,List<ABC>> c
-	 
+	 * @return HashMap<String,List<ABC>>
 	 * @throws Exception
 	 */
-	public HashMap<String, List<ABC>> perform2(List<ArrayList<String>> e, int b, HashMap<String, List<ABC>> c)
-			throws Exception {
+	public HashMap<String, List<ABC>> perform2(List<ArrayList<String>> e, int b, HashMap<String, List<ABC>> c) throws Exception { // Noncompliant
 		return 10;
 	}
 }
