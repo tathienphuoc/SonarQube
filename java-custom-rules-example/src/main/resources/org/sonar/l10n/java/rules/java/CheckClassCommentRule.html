@@ -1,28 +1,20 @@
-<p>This rule detects invalid Method comment</p>
+<p>This rule detects invalid class comment</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 	/**
-	 * Carry out business scenarios for each event
-	 * Branch processing of all events occurring in ALPS-MoneyMgmt system work
+	 * Description for class MyClass_01
 	 * 
-	 * @param e Event
-	 * @return EventResponse
-	 * @exception EventException
+	 * @author tathienphuoc
+	 * @see MyClass_01
+	 * @since J2EE 1.6
 	 */
-	public EventResponse perform(Event e) throws EventException {
-		return eventResponse;
+	class YourClassName{
+		//TO DO
 	}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-	/**
-	 * ESM_DOU_0108 : [Event]
-	 * [Act] for [Business Target].
-	 * This method is used for searching Summary data  
-	 * @param Event e
-	 * @return EventResponse
-	 * @exception EventException
-	 */
-	private EventResponse searchSummaryVO(Event e) throws EventException {
+	class YourClassName{
+		//TO DO
 	}
 </pre>

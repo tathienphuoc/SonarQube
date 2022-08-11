@@ -24,37 +24,30 @@ import org.sonar.samples.java.checks.SpringControllerRequestMappingEntityRule;
 
 public final class RulesList {
 
-  private RulesList() {
-  }
+	private RulesList() {
+	}
 
-  public static List<Class<? extends JavaCheck>> getChecks() {
-    List<Class<? extends JavaCheck>> checks = new ArrayList<>();
-    checks.addAll(getJavaChecks());
-    checks.addAll(getJavaTestChecks());
-    return Collections.unmodifiableList(checks);
-  }
+	public static List<Class<? extends JavaCheck>> getChecks() {
+		List<Class<? extends JavaCheck>> checks = new ArrayList<>();
+		checks.addAll(getJavaChecks());
+		checks.addAll(getJavaTestChecks());
+		return Collections.unmodifiableList(checks);
+	}
 
-  /**
-   * These rules are going to target MAIN code only
-   */
-  public static List<Class<? extends JavaCheck>> getJavaChecks() {
-    return Collections.unmodifiableList(Arrays.asList(
-      SpringControllerRequestMappingEntityRule.class,
-      AvoidAnnotationRule.class,
-      AvoidBrandInMethodNamesRule.class,
-      AvoidMethodDeclarationRule.class,
-      AvoidSuperClassRule.class,
-      AvoidTreeListRule.class,
-      MyCustomSubscriptionRule.class,
-      SecurityAnnotationMandatoryRule.class,
-      CheckMethodCommentRule.class));
-  }
+	/**
+	 * These rules are going to target MAIN code only
+	 */
+	public static List<Class<? extends JavaCheck>> getJavaChecks() {
+		return Collections.unmodifiableList(Arrays.asList(SpringControllerRequestMappingEntityRule.class,
+				AvoidAnnotationRule.class, AvoidBrandInMethodNamesRule.class, AvoidMethodDeclarationRule.class,
+				AvoidSuperClassRule.class, AvoidTreeListRule.class, MyCustomSubscriptionRule.class,
+				SecurityAnnotationMandatoryRule.class, CheckClassCommentRule.class, CheckMethodCommentRule.class));
+	}
 
-  /**
-   * These rules are going to target TEST code only
-   */
-  public static List<Class<? extends JavaCheck>> getJavaTestChecks() {
-    return Collections.unmodifiableList(Arrays.asList(
-      NoIfStatementInTestsRule.class));
-  }
+	/**
+	 * These rules are going to target TEST code only
+	 */
+	public static List<Class<? extends JavaCheck>> getJavaTestChecks() {
+		return Collections.unmodifiableList(Arrays.asList(NoIfStatementInTestsRule.class));
+	}
 }

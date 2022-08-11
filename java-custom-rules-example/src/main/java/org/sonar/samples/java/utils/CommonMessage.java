@@ -1,5 +1,24 @@
+/*=========================================================
+*Copyright(c) 2022 CyberLogitec
+*@FileName : CommonMessage.java
+*@FileTitle : CommonMessage
+*Open Issues :
+*Change history :
+*@LastModifyDate : 2022.08.11
+*@LastModifier : 
+*@LastVersion : 1.0
+* 2022.08.11
+* 1.0 Creation
+=========================================================*/
 package org.sonar.samples.java.utils;
 
+/**
+ * Common messages
+ * 
+ * @author tathienphuoc
+ * @see CommonMessage
+ * @since J2EE 1.6
+ */
 public final class CommonMessage {
 	public static final String ABSENT_CLASS_COMMENTS = "Missing class comments";
 	public static final String ABSENT_AUTHOR = "Missing author section";
@@ -13,7 +32,6 @@ public final class CommonMessage {
 	public static final String ABSENT_EXCEPTION = "Missing exception section";
 	public static final String ABSENT_EMPTY_LINE = "Missing empty line after description section";
 	
-	/********************************************************************************************************/
 
 	public static final String INVALID_CLASS_COMMENTS_FORMAT = "Class comment must start with /** and end with */";
 	public static final String INVALID_CLASS_ORDER_FORMAT = "Class comments format: \n\t* Description section \n\t* [Empty line] \n\t* Author section \n\t* See section \n\t* Since section";
@@ -27,18 +45,12 @@ public final class CommonMessage {
 	public static final String INVALID_RETURN_FORMAT = "\'RETURN\' must follow format: @return [Type]";
 	public static final String INVALID_EXCEPTION_FORMAT = "\'EXCEPTION\' must follow format: @exception [Type] ( or @throws [Type] ) ";
 
-	/********************************************************************************************************/
-	
-//	public static final String INVALID_AUTHOR = "Checking author section";
-//	public static final String INVALID_SEE = "Checking see section";
-//	public static final String INVALID_SINCE = "Checking since section";
 	
 	public static final String INVALID_PARAM = "Checking parameter section";
 	public static final String INVALID_RETURN = "Checking return section";
 	public static final String INVALID_EXCEPTION = "Checking exception section";
 	public static final String INVALID_LINE = "Line must start with * and one space";
 
-	/********************************************************************************************************/
 	
 	public static final String TOO_MANY_METHOD_COMMENTS = "Too many method comments";
 	public static final String TOO_MANY_RETURN = "Too many return comment";

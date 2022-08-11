@@ -1,5 +1,5 @@
 {
-  "title": "Check method comment",
+  "title": "Check class comment",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

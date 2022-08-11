@@ -1,4 +1,4 @@
-<p>This rule detects invalid Method comment</p>
+<p>This rule detects invalid method comment</p>
 <h2>Noncompliant Code Example</h2>
 <pre>
 	/**
@@ -10,19 +10,14 @@
 	 * @exception EventException
 	 */
 	public EventResponse perform(Event e) throws EventException {
+		//TO DO
 		return eventResponse;
 	}
 </pre>
 <h2>Compliant Solution</h2>
 <pre>
-	/**
-	 * ESM_DOU_0108 : [Event]
-	 * [Act] for [Business Target].
-	 * This method is used for searching Summary data  
-	 * @param Event e
-	 * @return EventResponse
-	 * @exception EventException
-	 */
 	private EventResponse searchSummaryVO(Event e) throws EventException {
+		//TO DO
+		return eventResponse;
 	}
 </pre>
