@@ -4,6 +4,14 @@
  */
 package org.sonar.samples.java.checks;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
@@ -15,7 +23,7 @@ import org.sonar.samples.java.utils.MethodCommentUtils;
 public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileScanner {
 
 	private JavaFileScannerContext context;
-
+	
 	@Override
 	public void scanFile(JavaFileScannerContext context) {
 		this.context = context;
@@ -24,10 +32,14 @@ public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileS
 
 	@Override
 	public void visitMethod(MethodTree tree) {
-		String errMsg = MethodCommentUtils.getDocErrMsg(tree);
-		if (!errMsg.isEmpty()) {
-			context.reportIssue(this, tree, errMsg);
-			System.out.println(errMsg);
+
+		List<String> errMsgs = MethodCommentUtils.getDocErrMsg(context,tree);
+		for(int i=0;i<errMsgs.size();i++) {
+			context.reportIssue(this, tree, errMsgs.get(i));
+			System.out.println( errMsgs.get(i));
+		}
+		if(errMsgs.isEmpty()) {
+			System.out.println("ok");
 		}
 	}
 }

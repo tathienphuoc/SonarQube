@@ -1,21 +1,30 @@
-import java.sql.SQLException;
-/**
- * ALPS-MoneyMgmt Business Logic ServiceCommand - Process business transaction for ALPS-MoneyMgmt.
- * 
- * @author phuoc
- * @see MoneyMgmtDBDAO
- * @since J2EE 1.6
- */
 class MyClass {
+
 	/**
 	 * Carry out business scenarios for each event<br>
 	 * Branch processing of all events occurring in ALPS-MoneyMgmt system work<br>
-	 * 
+	 * list ber: * fdsfsa *
+	 *
 	 * @param Event e
 	 * @return EventResponse
 	 * @exception EventException
 	 */
 	public EventResponse perform(Event e) throws EventException {
 		return eventResponse;
+	}
+
+	/**
+	 * ghfdh *
+	 * 
+	 * @param List<ArrayList<String>>   e
+	 * @param int                       b
+	 * @return HashMap<String,List<ABC>> 
+	 * @param HashMap<String,List<ABC>> c
+	 
+	 * @throws Exception
+	 */
+	public HashMap<String, List<ABC>> perform2(List<ArrayList<String>> e, int b, HashMap<String, List<ABC>> c)
+			throws Exception {
+		return 10;
 	}
 }

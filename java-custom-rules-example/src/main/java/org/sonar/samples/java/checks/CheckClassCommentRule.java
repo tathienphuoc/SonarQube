@@ -9,9 +9,7 @@ import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.samples.java.utils.ClassCommentUtils;
-import org.sonar.samples.java.utils.MethodCommentUtils;
 
 @Rule(key = "CheckClassCommentRule")
 public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileScanner {
@@ -29,7 +27,7 @@ public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileSc
 		String errMsg = ClassCommentUtils.getDocErrMsg(tree);
 		if (!errMsg.isEmpty()) {
 			context.reportIssue(this, tree, errMsg);
-			System.out.println(errMsg);
+//			System.out.println(errMsg);
 		}
 	}
 }

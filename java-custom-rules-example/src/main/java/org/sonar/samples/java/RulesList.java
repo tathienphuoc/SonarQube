@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonar.samples.java.checks.AvoidAnnotationRule;
 import org.sonar.samples.java.checks.AvoidBrandInMethodNamesRule;
