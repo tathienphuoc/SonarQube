@@ -36,7 +36,7 @@ public class ClassCommentUtils {
 		AUTHOR(Pattern.compile("^\\* @author\\s+[a-zA-Z]+\\S*\\s*$")),
 		INVALID_AUTHOR(Pattern.compile("\\*\\s*(@author).*$")), SEE(Pattern.compile("^\\* @see\\s+[a-zA-Z]+\\S*\\s*$")),
 		INVALID_SEE(Pattern.compile("\\*\\s*(@see).*$")), SINCE(Pattern.compile("^\\* @since(\\s+\\S+){2}\\s*$")),
-		INVALID_SINCE(Pattern.compile("\\*\\s*@since(\\s+\\S+){2,}\\s*$")), EMPTY_LINE(Pattern.compile("^\\*\\s*$"));
+		INVALID_SINCE(Pattern.compile("\\*\\s*(@since).*$")), EMPTY_LINE(Pattern.compile("^\\*\\s*$"));
 
 		private Pattern regex;
 
@@ -44,11 +44,11 @@ public class ClassCommentUtils {
 
 		static {
 
-			INVALID_AUTHOR.errMsg = CommonMessage.INVALID_AUTHOR_FORMAT;
-			INVALID_SEE.errMsg = CommonMessage.INVALID_SEE_FORMAT;
-			INVALID_SINCE.errMsg = CommonMessage.INVALID_SINCE_FORMAT;
-			INVALID_LINE.errMsg = CommonMessage.INVALID_LINE;
-			EMPTY_LINE.errMsg = CommonMessage.REMOVE_EMPTY_LINE;
+			INVALID_AUTHOR.errMsg = CommonMessage.CLASS_INVALID_AUTHOR_FORMAT;
+			INVALID_SEE.errMsg = CommonMessage.CLASS_INVALID_SEE_FORMAT;
+			INVALID_SINCE.errMsg = CommonMessage.CLASS_INVALID_SINCE_FORMAT;
+			INVALID_LINE.errMsg = CommonMessage.CLASS_INVALID_LINE_FORMAT;
+			EMPTY_LINE.errMsg = CommonMessage.CLASS_REMOVE_EMPTY_LINE;
 		}
 
 		/**
@@ -118,15 +118,15 @@ public class ClassCommentUtils {
 	private static String getClassComments(ClassTree tree) throws Exception {
 		List<SyntaxTrivia> classComments = tree.firstToken().trivias();
 		if (classComments.isEmpty()) {
-			throw new Exception(CommonMessage.ABSENT_CLASS_COMMENTS);
+			throw new Exception(CommonMessage.CLASS_ABSENT_COMMENTS);
 		} else if (classComments.size() > 1) {
-			throw new Exception(CommonMessage.TOO_MANY_CLASS_COMMENTS);
+			throw new Exception(CommonMessage.CLASS_TOO_MANY_COMMENTS);
 		} else {
 			String methodComment = classComments.get(0).comment();
 			if (methodComment.startsWith("/**") && methodComment.endsWith("*/") && methodComment.length() > 4) {
 				return methodComment;
 			}
-			throw new Exception(CommonMessage.INVALID_CLASS_COMMENTS_FORMAT);
+			throw new Exception(CommonMessage.CLASS_INVALID_COMMENTS_FORMAT);
 		}
 	}
 
@@ -176,7 +176,7 @@ public class ClassCommentUtils {
 					errMsgs.add(type.errMsg);
 				}
 				if (!isOrderedLine(type)) {
-					errMsgs.add(CommonMessage.INVALID_CLASS_ORDER_FORMAT);
+					errMsgs.add(CommonMessage.CLASS_INVALID_ORDER_FORMAT);
 				}
 			}
 		}
@@ -195,31 +195,30 @@ public class ClassCommentUtils {
 			return errMsgs;
 		}
 		if (classComments.get(Type.DESCRIPTION).isEmpty()) {
-			errMsgs.add(0, CommonMessage.ABSENT_DESCRIPTION);
+			errMsgs.add(0, CommonMessage.CLASS_ABSENT_DESCRIPTION);
 		} else if (classComments.get(Type.EMPTY_LINE).isEmpty()) {
-			errMsgs.add(0, CommonMessage.ABSENT_EMPTY_LINE);
+			errMsgs.add(0, CommonMessage.CLASS_ABSENT_EMPTY_LINE);
 		}
 		if (classComments.get(Type.AUTHOR).isEmpty()) {
-			errMsgs.add(CommonMessage.ABSENT_AUTHOR);
+			errMsgs.add(CommonMessage.CLASS_ABSENT_AUTHOR);
 		} else if (classComments.get(Type.AUTHOR).size() > 1) {
-			errMsgs.add(CommonMessage.TOO_MANY_AUTHOR);
+			errMsgs.add(CommonMessage.CLASS_TOO_MANY_AUTHOR);
 		}
 		if (classComments.get(Type.SEE).isEmpty()) {
-			errMsgs.add(CommonMessage.ABSENT_SEE);
+			errMsgs.add(CommonMessage.CLASS_ABSENT_SEE);
 		} else if (classComments.get(Type.SEE).size() > 1) {
-			errMsgs.add(CommonMessage.TOO_MANY_SEE);
+			errMsgs.add(CommonMessage.CLASS_TOO_MANY_SEE);
 		}
 		if (classComments.get(Type.SINCE).isEmpty()) {
-			errMsgs.add(CommonMessage.ABSENT_SINCE);
+			errMsgs.add(CommonMessage.CLASS_ABSENT_SINCE);
 		} else if (classComments.get(Type.SINCE).size() > 1) {
-			errMsgs.add(CommonMessage.TOO_MANY_SINCE);
+			errMsgs.add(CommonMessage.CLASS_TOO_MANY_SINCE);
 		}
 
 		return errMsgs;
 	}
-
 	/**
-	 * Remove unwanted characters in comments and return lines of comment
+	 * Remove unwanted characters in comments and return lines of comment<br/>
 	 * 
 	 * @param String javadoc
 	 * @return List<String>

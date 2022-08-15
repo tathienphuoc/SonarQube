@@ -6,9 +6,9 @@
   <groupId>org.sonar.samples</groupId>
 
   <!-- Change this artifactId to your own organization artifactId -->
-  <artifactId>java-custom-rules-example</artifactId>
+  <artifactId>opus-custom-rule</artifactId>
 
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <packaging>sonar-plugin</packaging>
 

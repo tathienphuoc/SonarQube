@@ -47,11 +47,11 @@ public class MethodCommentUtils {
 		private String errMsg = "";
 
 		static {
-			INVALID_PARAM.errMsg = CommonMessage.INVALID_PARAM_FORMAT;
-			INVALID_RETURN.errMsg = CommonMessage.INVALID_RETURN_FORMAT;
-			INVALID_EXCEPTION.errMsg = CommonMessage.INVALID_EXCEPTION_FORMAT;
-			INVALID_LINE.errMsg = CommonMessage.INVALID_LINE;
-			EMPTY_LINE.errMsg = CommonMessage.REMOVE_EMPTY_LINE;
+			INVALID_PARAM.errMsg = CommonMessage.METHOD_INVALID_PARAM_FORMAT;
+			INVALID_RETURN.errMsg = CommonMessage.METHOD_INVALID_RETURN_FORMAT;
+			INVALID_EXCEPTION.errMsg = CommonMessage.METHOD_INVALID_EXCEPTION_FORMAT;
+			INVALID_LINE.errMsg = CommonMessage.METHOD_INVALID_LINE_FORMAT;
+			EMPTY_LINE.errMsg = CommonMessage.METHOD_REMOVE_EMPTY_LINE;
 		}
 
 		/**
@@ -123,15 +123,15 @@ public class MethodCommentUtils {
 	private static String getMethodComments(MethodTree tree) throws Exception {
 		List<SyntaxTrivia> methodComments = tree.firstToken().trivias();
 		if (methodComments.isEmpty()) {
-			throw new Exception(CommonMessage.ABSENT_METHOD_COMMENTS);
+			throw new Exception(CommonMessage.METHOD_ABSENT_COMMENTS);
 		} else if (methodComments.size() > 1) {
-			throw new Exception(CommonMessage.TOO_MANY_METHOD_COMMENTS);
+			throw new Exception(CommonMessage.METHOD_TOO_MANY_COMMENTS);
 		} else {
 			String methodComment = methodComments.get(0).comment();
 			if (methodComment.startsWith("/**") && methodComment.endsWith("*/") && methodComment.length() > 4) {
 				return methodComment;
 			}
-			throw new Exception(CommonMessage.INVALID_METHOD_COMMENTS_FORMAT);
+			throw new Exception(CommonMessage.METHOD_INVALID_COMMENTS_FORMAT);
 		}
 	}
 
@@ -182,7 +182,7 @@ public class MethodCommentUtils {
 					errMsgs.add(type.errMsg);
 				}
 				if (!isOrderedLine(type)) {
-					errMsgs.add(CommonMessage.INVALID_ORDER_FORMAT);
+					errMsgs.add(CommonMessage.METHOD_INVALID_ORDER_FORMAT);
 				}
 			}
 		}
@@ -213,9 +213,9 @@ public class MethodCommentUtils {
 			return errMsgs;
 		}
 		if (methodComments.get(Type.DESCRIPTION).isEmpty()) {
-			errMsgs.add(0, CommonMessage.ABSENT_DESCRIPTION);
+			errMsgs.add(0, CommonMessage.METHOD_ABSENT_DESCRIPTION);
 		} else if (methodComments.get(Type.EMPTY_LINE).isEmpty()) {
-			errMsgs.add(0, CommonMessage.ABSENT_EMPTY_LINE);
+			errMsgs.add(0, CommonMessage.METHOD_ABSENT_EMPTY_LINE);
 		}
 		String paramErrMsg = getParamErrMsg(tree);
 		String returnErrMsg = getReturnErrMsg(tree);
@@ -242,16 +242,16 @@ public class MethodCommentUtils {
 		String declare = getLine(tree.firstToken().line()).replaceAll("\\s+", "").split("[()]")[1];
 		List<String> params = methodComments.get(Type.PARAM);
 		if (params.isEmpty() && !tree.parameters().isEmpty()) {
-			return CommonMessage.ABSENT_PARAM;
+			return CommonMessage.METHOD_ABSENT_PARAM;
 		} else if (params.size() < tree.parameters().size()) {
-			return CommonMessage.LACK_OF_PARAM;
+			return CommonMessage.METHOD_LACK_OF_PARAM;
 		} else if (params.size() > tree.parameters().size()) {
-			return CommonMessage.TOO_MANY_PARAM;
+			return CommonMessage.METHOD_TOO_MANY_PARAM;
 		} else if (params.isEmpty() && declare.isEmpty()) {
 			return "";
 		} else {
 			String paramComments = String.join(",", params).replaceAll("\\* @param|\\s+", "");
-			return paramComments.equals(declare) ? "" : CommonMessage.INVALID_PARAM;
+			return paramComments.equals(declare) ? "" : CommonMessage.METHOD_INVALID_PARAM;
 		}
 	}
 
@@ -264,14 +264,14 @@ public class MethodCommentUtils {
 	public static String getReturnErrMsg(MethodTree tree) {
 		org.sonar.plugins.java.api.semantic.Type rType = tree.returnType().symbolType();
 		if (methodComments.get(Type.RETURN).isEmpty()) {
-			return rType.isVoid() ? "" : CommonMessage.ABSENT_RETURN;
+			return rType.isVoid() ? "" : CommonMessage.METHOD_ABSENT_RETURN;
 		} else if (methodComments.get(Type.RETURN).size() > 1) {
-			return CommonMessage.TOO_MANY_RETURN;
+			return CommonMessage.METHOD_TOO_MANY_RETURN;
 		}
 		String declare = getLine(tree.firstToken().line()).replaceAll("\\s+", "").split("[()]")[0];
 		String returnComment = methodComments.get(Type.RETURN).get(0).replaceAll("\\* @return|\\s+", "")
 				+ tree.symbol().name();
-		return declare.contains(returnComment) ? "" : CommonMessage.INVALID_RETURN;
+		return declare.contains(returnComment) ? "" : CommonMessage.METHOD_INVALID_RETURN;
 	}
 
 	/**
@@ -286,15 +286,15 @@ public class MethodCommentUtils {
 		List<String> exceptionTypes = methodComments.get(Type.EXCEPTION).stream()
 				.map(ex -> ex.replaceAll("\\* @exception|\\* @throws", "").trim()).collect(Collectors.toList());
 		if (exceptionTypes.isEmpty() && !throwsTypes.isEmpty()) {
-			return CommonMessage.ABSENT_EXCEPTION;
+			return CommonMessage.METHOD_ABSENT_EXCEPTION;
 		} else if (exceptionTypes.size() < throwsTypes.size()) {
-			return CommonMessage.LACK_OF_EXCEPTION;
+			return CommonMessage.METHOD_LACK_OF_EXCEPTION;
 		} else if (exceptionTypes.size() > throwsTypes.size()) {
-			return CommonMessage.TOO_MANY_EXCEPTION;
+			return CommonMessage.METHOD_TOO_MANY_EXCEPTION;
 		}
 		for (int i = 0; i < throwsTypes.size(); i++) {
 			if (!exceptionTypes.get(i).equals(throwsTypes.get(i))) {
-				return CommonMessage.INVALID_EXCEPTION;
+				return CommonMessage.METHOD_INVALID_EXCEPTION;
 			}
 		}
 		return "";

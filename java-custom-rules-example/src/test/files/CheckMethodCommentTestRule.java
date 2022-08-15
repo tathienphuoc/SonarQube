@@ -1,3 +1,15 @@
+/*=========================================================
+*Copyright(c) 2022 CyberLogitec
+*@FileName : CheckMethodCommentRule.java
+*@FileTitle : CheckMethodCommentRule
+*Open Issues :
+*Change history :
+*@LastModifyDate : 2022.08.11
+*@LastModifier : 
+*@LastVersion : 1.0
+* 2022.08.11
+* 1.0 Creation
+=========================================================*/
 class MyClass {
 
 	/**
@@ -12,17 +24,6 @@ class MyClass {
 	public EventResponse perform(Event e) throws EventException {
 		return eventResponse;
 	}
-
-	/**
-	 * ghfdh *
-	 * 
-	 * @param List<ArrayList<String>>   e
-	 * @param int                       b
-	 * 
-	 * @param HashMap<String,List<ABC>> c
-	 * @return HashMap<String,List<ABC>>
-	 * @throws Exception
-	 */
 	public HashMap<String, List<ABC>> perform2(List<ArrayList<String>> e, int b, HashMap<String, List<ABC>> c) throws Exception { // Noncompliant
 		return 10;
 	}
