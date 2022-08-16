@@ -23,6 +23,7 @@ import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.plugins.java.api.tree.SyntaxTrivia;
+import org.sonar.plugins.java.api.tree.TypeTree;
 
 /**
  * Utility Method Comment
@@ -32,6 +33,9 @@ import org.sonar.plugins.java.api.tree.SyntaxTrivia;
  * @since J2EE 1.6
  */
 public class MethodCommentUtils {
+	private static EnumMap<Type, ArrayList<String>> methodComments = new EnumMap<>(Type.class);
+
+	private static JavaFileScannerContext context;
 
 	private enum Type {
 		INVALID_LINE(Pattern.compile("^[^\\*]|(\\*)\\S+")), DESCRIPTION(Pattern.compile("^\\*\\s+[^@][a-zA-Z0-9]+.*$")),
@@ -87,30 +91,6 @@ public class MethodCommentUtils {
 			}
 			return DESCRIPTION;
 		}
-	}
-
-	private static EnumMap<Type, ArrayList<String>> methodComments = new EnumMap<>(Type.class);
-
-	private static JavaFileScannerContext context;
-
-	/**
-	 * Initialize method comments variable
-	 * 
-	 */
-	private static void initMethodComments() {
-		for (Type t : Type.values()) {
-			methodComments.put(t, new ArrayList<>());
-		}
-	}
-
-	/**
-	 * Check if method comment allows empty line or not
-	 * 
-	 * @return boolean
-	 */
-	private static boolean allowEmptyLine() {
-		return methodComments.get(Type.PARAM).isEmpty() && methodComments.get(Type.RETURN).isEmpty()
-				&& methodComments.get(Type.EXCEPTION).isEmpty();
 	}
 
 	/**
@@ -231,6 +211,26 @@ public class MethodCommentUtils {
 		}
 		return errMsgs;
 	}
+	
+	/**
+	 * Initialize method comments variable
+	 * 
+	 */
+	private static void initMethodComments() {
+		for (Type t : Type.values()) {
+			methodComments.put(t, new ArrayList<>());
+		}
+	}
+
+	/**
+	 * Check if method comment allows empty line or not
+	 * 
+	 * @return boolean
+	 */
+	private static boolean allowEmptyLine() {
+		return methodComments.get(Type.PARAM).isEmpty() && methodComments.get(Type.RETURN).isEmpty()
+				&& methodComments.get(Type.EXCEPTION).isEmpty();
+	}
 
 	/**
 	 * Get errors message of invalid parameter comments 
@@ -262,6 +262,9 @@ public class MethodCommentUtils {
 	 * @return String
 	 */
 	public static String getReturnErrMsg(MethodTree tree) {
+		if(tree.returnType()==null) {
+			return methodComments.get(Type.RETURN).isEmpty()?"": CommonMessage.METHOD_INVALID_RETURN;
+		}
 		org.sonar.plugins.java.api.semantic.Type rType = tree.returnType().symbolType();
 		if (methodComments.get(Type.RETURN).isEmpty()) {
 			return rType.isVoid() ? "" : CommonMessage.METHOD_ABSENT_RETURN;

@@ -18,10 +18,9 @@ class MyClass {
 	 * list ber: * fdsfsa *
 	 *
 	 * @param Event e
-	 * @return EventResponse
 	 * @exception EventException
 	 */
-	public EventResponse perform(Event e) throws EventException {
+	public perform(Event e) throws EventException {
 		return eventResponse;
 	}
 	public HashMap<String, List<ABC>> perform2(List<ArrayList<String>> e, int b, HashMap<String, List<ABC>> c) throws Exception { // Noncompliant
