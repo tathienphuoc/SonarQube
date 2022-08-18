@@ -20,6 +20,8 @@ package org.sonar.samples.java.utils;
  * @since J2EE 1.6
  */
 public final class CommonMessage {
+	public static final String FILE_ABSENT_COMMENTS = "[R4J][File comment] Missing file comments";
+	
 	public static final String CLASS_ABSENT_COMMENTS = "[R4J][Class comment] Missing class comments";
 	public static final String CLASS_ABSENT_DESCRIPTION = "[R4J][Class comment] Missing description section";
 	public static final String CLASS_ABSENT_AUTHOR = "[R4J][Class comment] Missing author section";
@@ -34,6 +36,8 @@ public final class CommonMessage {
 	public static final String METHOD_ABSENT_EXCEPTION = "[R4J][Method comment] Missing exception section";
 	public static final String METHOD_ABSENT_EMPTY_LINE = "[R4J][Method comment] Missing empty line after description section";
 
+	public static final String FILE_INVALID_COMMENTS_FORMAT = "[R4J][File comment] Please checks rule description for more detail";
+	
 	public static final String CLASS_INVALID_COMMENTS_FORMAT = "[R4J][Class comment] Class comment must start with /** and end with */";
 	public static final String CLASS_INVALID_ORDER_FORMAT = "[R4J][Class comment] Class comments format: \n\t* Description section \n\t* [Empty line] \n\t* Author section \n\t* See section \n\t* Since section";
 	public static final String CLASS_INVALID_AUTHOR_FORMAT = "[R4J][Class comment] \'AUTHOR\' must follow the format: @author [Name]";

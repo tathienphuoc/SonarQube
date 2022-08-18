@@ -1,7 +1,7 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CheckMethodCommentRule.java
-*@FileTitle : CheckMethodCommentRule
+*@FileName : CheckClassCommentRule.java
+*@FileTitle : CheckClassCommentRule
 *Open Issues :
 *Change history :
 *@LastModifyDate : 2022.08.11
@@ -12,23 +12,22 @@
 =========================================================*/
 package org.sonar.samples.java.checks;
 
-import java.util.List;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.java.api.tree.MethodTree;
-import org.sonar.samples.java.utils.MethodCommentUtils;
+import org.sonar.plugins.java.api.tree.ClassTree;
+import org.sonar.samples.java.utils.FileCommentUtils;
+
 /**
- * This rule detects invalid method comment
+ * This rule detects invalid class comment
  * 
  * @author tathienphuoc
- * @see CheckClassCommentRule
+ * @see CheckFileCommentRule
  * @since J2EE 1.6
  */
-@Rule(key = "CheckMethodCommentRule")
-public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileScanner {
+@Rule(key = "CheckFileCommentRule")
+public class CheckFileCommentRule extends BaseTreeVisitor implements JavaFileScanner {
 
 	private JavaFileScannerContext context;
 
@@ -44,15 +43,15 @@ public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileS
 	}
 
 	/**
-	 * Override visitMethod method from BaseTreeVisitor
+	 * Override visitClass method from BaseTreeVisitor
 	 * 
-	 * @param MethodTree tree
+	 * @param ClassTree tree
 	 */
 	@Override
-	public void visitMethod(MethodTree tree) {
-		List<String> errMsgs = MethodCommentUtils.getDocErrMsgs(context, tree);
-		for (int i = 0; i < errMsgs.size(); i++) {
-			context.reportIssue(this, tree, errMsgs.get(i));
+	public void visitClass(ClassTree tree) {
+		String errMsg=FileCommentUtils.getDocErrMsgs(context,tree);
+		if(!errMsg.isEmpty()) {
+			context.reportIssue(this, tree, errMsg);
 		}
 	}
 }

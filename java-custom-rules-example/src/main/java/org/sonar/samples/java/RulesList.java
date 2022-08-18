@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.sonar.plugins.java.api.JavaCheck;
 import org.sonar.samples.java.checks.CheckClassCommentRule;
+import org.sonar.samples.java.checks.CheckFileCommentRule;
 import org.sonar.samples.java.checks.CheckMethodCommentRule;
 import org.sonar.samples.java.checks.NoIfStatementInTestsRule;
 
@@ -30,7 +31,7 @@ public final class RulesList {
 	 * These rules are going to target MAIN code only
 	 */
 	public static List<Class<? extends JavaCheck>> getJavaChecks() {
-		return Collections.unmodifiableList(Arrays.asList(CheckClassCommentRule.class, CheckMethodCommentRule.class));
+		return Collections.unmodifiableList(Arrays.asList(CheckClassCommentRule.class, CheckMethodCommentRule.class, CheckFileCommentRule.class));
 	}
 
 	/**

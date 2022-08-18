@@ -4,16 +4,13 @@
  */
 package org.sonar.samples.java;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
-import org.sonar.api.rules.RuleType;
-import org.sonar.api.server.debt.DebtRemediationFunction.Type;
-import org.sonar.api.server.rule.RuleParamType;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinition.Param;
 import org.sonar.api.server.rule.RulesDefinition.Repository;
 import org.sonar.api.server.rule.RulesDefinition.Rule;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class MyJavaRulesDefinitionTest {
 
