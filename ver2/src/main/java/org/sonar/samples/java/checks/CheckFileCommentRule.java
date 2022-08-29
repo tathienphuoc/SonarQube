@@ -12,24 +12,23 @@
 =========================================================*/
 package org.sonar.samples.java.checks;
 
-import java.util.List;
-
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.samples.java.utils.ClassCommentUtils;
+import org.sonar.samples.java.utils.CommonMessage;
+import org.sonar.samples.java.utils.FileCommentUtils;
 
 /**
  * This rule detects invalid class comment
  * 
  * @author tathienphuoc
- * @see CheckClassCommentRule
+ * @see CheckFileCommentRule
  * @since J2EE 1.6
  */
-@Rule(key = "CheckClassCommentRule")
-public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileScanner {
+@Rule(key = "CheckFileCommentRule")
+public class CheckFileCommentRule extends BaseTreeVisitor implements JavaFileScanner {
 
 	private JavaFileScannerContext context;
 
@@ -51,9 +50,15 @@ public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileSc
 	 */
 	@Override
 	public void visitClass(ClassTree tree) {
-		List<String> errMsgs = ClassCommentUtils.getDocErrMsgs(tree);
-		for (int i = 0; i < errMsgs.size(); i++) {
-			context.reportIssue(this, tree, errMsgs.get(i));
+		try {
+			String errMsg = FileCommentUtils.getDocErrMsgs(context, tree);
+			if (!errMsg.isEmpty()) {
+				System.out.println(errMsg);
+				context.reportIssue(this, tree, errMsg);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			context.reportIssue(this, tree, CommonMessage.NOT_SUPPORT);
 		}
 	}
 }

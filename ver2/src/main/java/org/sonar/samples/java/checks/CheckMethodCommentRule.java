@@ -1,7 +1,7 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CheckClassCommentRule.java
-*@FileTitle : CheckClassCommentRule
+*@FileName : CheckMethodCommentRule.java
+*@FileTitle : CheckMethodCommentRule
 *Open Issues :
 *Change history :
 *@LastModifyDate : 2022.08.11
@@ -12,22 +12,25 @@
 =========================================================*/
 package org.sonar.samples.java.checks;
 
+import java.util.List;
+
 import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.java.api.tree.ClassTree;
-import org.sonar.samples.java.utils.FileCommentUtils;
+import org.sonar.plugins.java.api.tree.MethodTree;
+import org.sonar.samples.java.utils.CommonMessage;
+import org.sonar.samples.java.utils.MethodCommentUtils;
 
 /**
- * This rule detects invalid class comment
+ * This rule detects invalid method comment
  * 
  * @author tathienphuoc
- * @see CheckFileCommentRule
+ * @see CheckClassCommentRule
  * @since J2EE 1.6
  */
-@Rule(key = "CheckFileCommentRule")
-public class CheckFileCommentRule extends BaseTreeVisitor implements JavaFileScanner {
+@Rule(key = "CheckMethodCommentRule")
+public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileScanner {
 
 	private JavaFileScannerContext context;
 
@@ -43,15 +46,19 @@ public class CheckFileCommentRule extends BaseTreeVisitor implements JavaFileSca
 	}
 
 	/**
-	 * Override visitClass method from BaseTreeVisitor
+	 * Override visitMethod method from BaseTreeVisitor
 	 * 
-	 * @param ClassTree tree
+	 * @param MethodTree tree
 	 */
 	@Override
-	public void visitClass(ClassTree tree) {
-		String errMsg=FileCommentUtils.getDocErrMsgs(context,tree);
-		if(!errMsg.isEmpty()) {
-			context.reportIssue(this, tree, errMsg);
+	public void visitMethod(MethodTree tree) {
+		try {
+			List<String> errMsgs = MethodCommentUtils.getDocErrMsgs(context, tree);
+			for (int i = 0; i < errMsgs.size(); i++) {
+				context.reportIssue(this, tree, errMsgs.get(i));
+			}
+		} catch (Exception e) {
+			context.reportIssue(this, tree, CommonMessage.NOT_SUPPORT);
 		}
 	}
 }

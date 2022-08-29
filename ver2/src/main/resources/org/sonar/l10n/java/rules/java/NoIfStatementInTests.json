@@ -1,5 +1,5 @@
 {
-  "title": "JUnit4 tests should not contain if statements",
+  "title": "NOT USE",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

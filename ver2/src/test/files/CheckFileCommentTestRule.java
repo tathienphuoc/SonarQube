@@ -1,12 +1,15 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : MethodCommentUtils.java          
-*@FileTitle : MethodCommentUtils           
+*@FileName : CcdCommonBC.java          
+*@FileTitle : CcdCommonBC           
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2022.08.11
+*@LastModifyDate : 
 *@LastModifier : 
 *@LastVersion : 1.0
 =========================================================*/
-public class MethodCommentUtils {}
-public class MethodCommentUtils2 {}// Noncompliant
+package com.clt.apps;
+
+import java.utils.*;
+public interface CcdCommonBC {}
+

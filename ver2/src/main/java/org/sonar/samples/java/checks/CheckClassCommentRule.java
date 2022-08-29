@@ -1,7 +1,7 @@
 /*=========================================================
 *Copyright(c) 2022 CyberLogitec
-*@FileName : CheckMethodCommentRule.java
-*@FileTitle : CheckMethodCommentRule
+*@FileName : CheckClassCommentRule.java
+*@FileTitle : CheckClassCommentRule
 *Open Issues :
 *Change history :
 *@LastModifyDate : 2022.08.11
@@ -18,17 +18,19 @@ import org.sonar.check.Rule;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.java.api.tree.MethodTree;
-import org.sonar.samples.java.utils.MethodCommentUtils;
+import org.sonar.plugins.java.api.tree.ClassTree;
+import org.sonar.samples.java.utils.ClassCommentUtils;
+import org.sonar.samples.java.utils.CommonMessage;
+
 /**
- * This rule detects invalid method comment
+ * This rule detects invalid class comment
  * 
  * @author tathienphuoc
  * @see CheckClassCommentRule
  * @since J2EE 1.6
  */
-@Rule(key = "CheckMethodCommentRule")
-public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileScanner {
+@Rule(key = "CheckClassCommentRule")
+public class CheckClassCommentRule extends BaseTreeVisitor implements JavaFileScanner {
 
 	private JavaFileScannerContext context;
 
@@ -44,15 +46,19 @@ public class CheckMethodCommentRule extends BaseTreeVisitor implements JavaFileS
 	}
 
 	/**
-	 * Override visitMethod method from BaseTreeVisitor
+	 * Override visitClass method from BaseTreeVisitor
 	 * 
-	 * @param MethodTree tree
+	 * @param ClassTree tree
 	 */
 	@Override
-	public void visitMethod(MethodTree tree) {
-		List<String> errMsgs = MethodCommentUtils.getDocErrMsgs(context, tree);
-		for (int i = 0; i < errMsgs.size(); i++) {
-			context.reportIssue(this, tree, errMsgs.get(i));
+	public void visitClass(ClassTree tree) {
+		try {
+			List<String> errMsgs = ClassCommentUtils.getDocErrMsgs(tree);
+			for (int i = 0; i < errMsgs.size(); i++) {
+				context.reportIssue(this, tree, errMsgs.get(i));
+			}
+		}catch (Exception e) {
+			context.reportIssue(this, tree, CommonMessage.NOT_SUPPORT);
 		}
 	}
 }
