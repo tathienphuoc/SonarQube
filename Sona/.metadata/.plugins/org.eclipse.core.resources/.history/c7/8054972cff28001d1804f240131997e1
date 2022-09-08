@@ -1,0 +1,76 @@
+package org.sonar.samples.java.utils;
+
+import java.util.regex.Pattern;
+
+import org.sonar.samples.java.utils.MethodCommentUtils_bk.Type;
+
+public enum CommonType {
+	DESCRIPTION, EMPTY_LINE, PARAM, RETURN, EXCEPTION, OTHER, EMPTY_LINE_WITHOUT_ASTERISK, INVALID_LINE_FORMAT,
+	INVALID_PARAM_FORMAT, INVALID_DESCRIPTION_FORMAT, INVALID_RETURN_FORMAT, INVALID_EXCEPTION_FORMAT,
+	INVALID_EXTRA_WHITESPACE_FORMAT;
+
+	String errMsg = "";
+
+	static {
+		EMPTY_LINE.errMsg = CommonMessage.REMOVE_EMPTY_LINE;
+		EMPTY_LINE_WITHOUT_ASTERISK.errMsg = CommonMessage.REMOVE_EMPTY_LINE_WITHOUT_ASTERISK;
+		INVALID_LINE_FORMAT.errMsg = CommonMessage.INVALID_LINE_FORMAT;
+		INVALID_DESCRIPTION_FORMAT.errMsg = CommonMessage.INVALID_DESCRIPTION_FORMAT;
+		INVALID_PARAM_FORMAT.errMsg = CommonMessage.METHOD_INVALID_PARAM_FORMAT;
+		INVALID_RETURN_FORMAT.errMsg = CommonMessage.METHOD_INVALID_RETURN_FORMAT;
+		INVALID_EXCEPTION_FORMAT.errMsg = CommonMessage.METHOD_INVALID_EXCEPTION_FORMAT;
+//		INVALID_EXTRA_WHITESPACE_FORMAT.errMsg = CommonMessage.METHOD_REMOVE_EXTRA_WHITESPACE;
+	}
+
+	public static CommonType getType(String line) {// line==null is necessary?
+		if (line.isEmpty()) {// line==null is necessary?
+			return EMPTY_LINE_WITHOUT_ASTERISK;
+		} else if (line.equals("*")) {// *
+			return EMPTY_LINE;
+		}
+//case @param thi fao
+		int beginIndex = line.indexOf("@");
+		int lastIndex = line.indexOf(" ", 2);
+		String annotation = "";
+		if (beginIndex != -1) {
+			annotation = lastIndex == -1 ? line.substring(beginIndex) : line.substring(beginIndex, lastIndex);
+		}
+
+		if (Pattern.compile("^(\\*){0,1}(\\s{2,}){0,1}@").matcher(line).find()) {// annotation vi pham
+			switch (annotation) {
+			case "@param":
+				methodComments.get(INVALID_PARAM_FORMAT).add(line);
+				break;
+			case "@return":
+				methodComments.get(INVALID_RETURN_FORMAT).add(line);
+				break;
+			case "@throws":
+			case "@exception":
+				methodComments.get(INVALID_RETURN_FORMAT).add(line);
+				break;
+			default:
+				break;
+			}
+			return INVALID_LINE_FORMAT;
+		} else if (Pattern.compile("^(\\*){0,1}(\\s{2,}){0,1}[^@]").matcher(line).find()) {// des
+			return line.endsWith("<br>") ? DESCRIPTION : INVALID_DESCRIPTION_FORMAT;
+		} else {
+			switch (annotation) {
+			case "@param":
+				return validFormat(line, PARAM) ? PARAM : INVALID_PARAM_FORMAT;
+			case "@return":
+				return validFormat(line, RETURN) ? RETURN : INVALID_RETURN_FORMAT;
+			case "@throws":
+			case "@exception":
+				if (line.split("\\s+").length == 3) {
+					return EXCEPTION;
+				} else {
+					return INVALID_EXCEPTION_FORMAT;
+				}
+			default:
+				break;
+			}
+		}
+		return OTHER;
+	}
+}

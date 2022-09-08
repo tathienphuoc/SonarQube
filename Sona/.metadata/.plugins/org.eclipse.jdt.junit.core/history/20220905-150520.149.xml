@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CheckMethodCommentTest (1)" project="ver2" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="org.sonar.samples.java.checks.CheckMethodCommentTest" time="0.907" displayname="CheckMethodCommentTest" uniqueid="[engine:junit-jupiter]/[class:org.sonar.samples.java.checks.CheckMethodCommentTest]">
+    <testcase name="testMethodComment" classname="org.sonar.samples.java.checks.CheckMethodCommentTest" time="0.907" displayname="testMethodComment()" uniqueid="[engine:junit-jupiter]/[class:org.sonar.samples.java.checks.CheckMethodCommentTest]/[method:testMethodComment()]"/>
+  </testsuite>
+</testrun>

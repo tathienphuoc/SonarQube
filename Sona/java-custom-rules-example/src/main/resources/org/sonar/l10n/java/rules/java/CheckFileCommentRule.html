@@ -1,0 +1,27 @@
+<p>This rule detects invalid file comment</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+	//Your imports
+	//Your class comments
+	public class YourClassName {
+		//TO DO
+	}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+	/*=========================================================
+	*Copyright(c) 2022 CyberLogitec
+	*@FileName : YourClassName.java          
+	*@FileTitle : YourClassName           
+	*Open Issues :
+	*Change history :
+	*@LastModifyDate : 2022.08.11
+	*@LastModifier : 
+	*@LastVersion : 1.0
+	=========================================================*/
+	//Your imports
+	//Your class comments
+	public class YourClassName {
+		//TO DO
+	}
+</pre>

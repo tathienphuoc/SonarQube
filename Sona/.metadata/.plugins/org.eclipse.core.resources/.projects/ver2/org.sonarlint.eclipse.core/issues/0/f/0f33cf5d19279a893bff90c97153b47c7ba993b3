@@ -1,0 +1,14 @@
+
+h	java:S125-"<This block of commented-out lines of code should be removed.(¶ÌãH³ŞRMAJORZ
+CODE_SMELL
+h	java:S125O"<This block of commented-out lines of code should be removed.(»İ–ıHµŞRMAJORZ
+CODE_SMELL
+h	java:S1251"<This block of commented-out lines of code should be removed.(È¬­áH´ŞRMAJORZ
+CODE_SMELL
+~	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ªã„îıÿÿÿÿH°ŞRMINORZ
+CODE_SMELL
+m	java:S125!"<This block of commented-out lines of code should be removed.(±Œ…€ùÿÿÿÿH²ŞRMAJORZ
+CODE_SMELL
+l
+java:S1118":Add a private constructor to hide the implicit public one.(ªã„îıÿÿÿÿH±ŞRMAJORZ
+CODE_SMELL

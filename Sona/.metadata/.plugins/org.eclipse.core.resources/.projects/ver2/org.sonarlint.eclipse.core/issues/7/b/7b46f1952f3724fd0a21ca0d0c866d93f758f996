@@ -1,0 +1,98 @@
+
+‚
+java:S3776a"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(ùËÿŞH¢ÕRCRITICALZ
+CODE_SMELL
+i	java:S125â"<This block of commented-out lines of code should be removed.(©Ÿ»HåÕRMAJORZ
+CODE_SMELL
+\
+java:S1444*"*Make this "public static tree" field final(ç¯ƒóùÿÿÿÿHÅÕRMINORZ
+CODE_SMELL
+…
+java:S11045"QMake regex a static final constant or non-public and provide accessors if needed.(š­û”8ıôêá¯0HÍÕRMINORZ
+CODE_SMELL
+ˆ
+java:S3776Á"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ãÚ×ÖıÿÿÿÿHëÕRCRITICALZ
+CODE_SMELL
+„
+java:S1104,"RMake prefix a static final constant or non-public and provide accessors if needed.(óìÅ¾ÿÿÿÿÿHÄÕRMINORZ
+CODE_SMELL
+x	java:S112£"FDefine and throw a dedicated exception instead of using a generic one.(Î«›­øÿÿÿÿHßÕRMAJORZ
+CODE_SMELL
+_
+java:S1444'"-Make this "public static errMsgs" field final(ù‘ÍóúÿÿÿÿHÊÕRMINORZ
+CODE_SMELL
+ˆ
+java:S1104+"VMake methodName a static final constant or non-public and provide accessors if needed.(´—úÿÿÿÿH“ÖRMINORZ
+CODE_SMELL
+j
+java:S2589Ø"7Remove this expression which always evaluates to "true"(Ì µ‡ùÿÿÿÿHµÕRMAJORZ
+CODE_SMELL
+U
+java:S30664"#Lower the visibility of this field.(ÊŒüüÿÿÿÿH¶ÕRMINORZ
+CODE_SMELL
+i	java:S125ÿ"<This block of commented-out lines of code should be removed.(†€éˆHŞÕRMAJORZ
+CODE_SMELL
+e
+java:S1444)"3Make this "public static declareMethod" field final(¼—¥öùÿÿÿÿHËÕRMINORZ
+CODE_SMELL
+x	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÉÆ¢ºÿÿÿÿÿHúÕRMAJORZ
+CODE_SMELL
+h	java:S125£"<This block of commented-out lines of code should be removed.(ÜÆš]H•ÖRMAJORZ
+CODE_SMELL
+~	java:S101$"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ƒíŒ¯üÿÿÿÿHêÕRMINORZ
+CODE_SMELL
+…
+java:S1104'"SMake errMsgs a static final constant or non-public and provide accessors if needed.(ù‘ÍóúÿÿÿÿHÌÕRMINORZ
+CODE_SMELL
+ˆ
+java:S3776—"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(È‡ûÒùÿÿÿÿHşÕRCRITICALZ
+CODE_SMELL
+s	java:S112ª"FDefine and throw a dedicated exception instead of using a generic one.(–ºÅHÈÕRMAJORZ
+CODE_SMELL
+n	java:S125ì"<This block of commented-out lines of code should be removed.(´ºŒºüÿÿÿÿHäÕRMAJORZ
+CODE_SMELL
+Œ
+java:S2293ã"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÍüÊÂÿÿÿÿÿH—ÖRMINORZ
+CODE_SMELL
+„
+java:S11044"RMake errMsg a static final constant or non-public and provide accessors if needed.(ÊŒüüÿÿÿÿH¡ÕRMINORZ
+CODE_SMELL
+i	java:S125‡"<This block of commented-out lines of code should be removed.(†¥Ù¹HÎÕRMAJORZ
+CODE_SMELL
+j
+java:S2589®"7Remove this expression which always evaluates to "true"(Ì µ‡ùÿÿÿÿHÉÕRMAJORZ
+CODE_SMELL
+‹
+java:S1104)"YMake declareMethod a static final constant or non-public and provide accessors if needed.(¼—¥öùÿÿÿÿHİÕRMINORZ
+CODE_SMELL
+^
+java:S1444,",Make this "public static prefix" field final(óìÅ¾ÿÿÿÿÿH²ÕRMINORZ
+CODE_SMELL
+O
+java:S2386'"Make this member "protected".(ù‘ÍóúÿÿÿÿHâÕRMINORZ
+CODE_SMELL
+W
+java:S30665"#Lower the visibility of this field.(š­û”8ıôêá¯0HãÕRMINORZ
+CODE_SMELL
+X
+java:S1659˜"*Declare "declareCount" on a separate line.(ÿ©ÓÆHÆÕRMINORZ
+CODE_SMELL
+n	java:S125Ã"<This block of commented-out lines of code should be removed.(ğ‘¼·üÿÿÿÿH¸ÕRMAJORZ
+CODE_SMELL
+–
+java:S1319'"dThe type of "errMsgs" should be an interface such as "Map" rather than the implementation "HashMap".(ù‘ÍóúÿÿÿÿHûÕRMINORZ
+CODE_SMELL
+‚
+java:S1104*"PMake tree a static final constant or non-public and provide accessors if needed.(ç¯ƒóùÿÿÿÿHáÕRMINORZ
+CODE_SMELL
+i	java:S125†"<This block of commented-out lines of code should be removed.(”½HàÕRMAJORZ
+CODE_SMELL
+s	java:S112¡"FDefine and throw a dedicated exception instead of using a generic one.(·Ù—ÊH³ÕRMAJORZ
+CODE_SMELL
+m	java:S125("<This block of commented-out lines of code should be removed.(İêçõÿÿÿÿÿH·ÕRMAJORZ
+CODE_SMELL
+n	java:S125Ş"<This block of commented-out lines of code should be removed.(Üî­¬üÿÿÿÿH”ÖRMAJORZ
+CODE_SMELL
+b
+java:S1444+"0Make this "public static methodName" field final(´—úÿÿÿÿH´ÕRMINORZ
+CODE_SMELL

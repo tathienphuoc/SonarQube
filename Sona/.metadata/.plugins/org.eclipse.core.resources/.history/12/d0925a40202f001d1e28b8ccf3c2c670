@@ -1,0 +1,28 @@
+package org.sonar.samples.java;
+
+import javax.naming.NamingException;
+
+public class TestRule {
+	public int sum(int a, int b) throws NamingException {
+		throw new NamingException("fdsa");
+	}
+
+	public String sumtes(int a) {
+		try {
+			sum(10, 2);
+			return "";
+		} catch (NamingException e) {
+			try {
+				e.printStackTrace();
+			} catch (Exception m) {
+				return m.getMessage();
+			}
+		}
+		return "";
+
+	}
+	public static void main(String[] args) {
+		TestRule a = new TestRule();
+		a.sumtes(10);
+	}
+}

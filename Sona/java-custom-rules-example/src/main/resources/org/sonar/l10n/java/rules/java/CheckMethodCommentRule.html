@@ -1,0 +1,23 @@
+<p>This rule detects invalid method comment</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+	private EventResponse searchSummaryVO(Event e) throws EventException {
+		//TO DO
+		return eventResponse;
+	}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+	/**
+	 * Carry out business scenarios for each event 
+	 * Branch processing of all events occurring in ALPS-MoneyMgmt system work 
+	 * 
+	 * @param Event e
+	 * @return EventResponse
+	 * @exception EventException
+	 */
+	public EventResponse perform(Event e) throws EventException {
+		//TO DO
+		return eventResponse;
+	}
+</pre>

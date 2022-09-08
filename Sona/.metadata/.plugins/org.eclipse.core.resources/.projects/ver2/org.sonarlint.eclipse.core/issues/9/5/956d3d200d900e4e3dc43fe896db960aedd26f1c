@@ -1,0 +1,11 @@
+
+d
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8Â±œ…±0HÆéRMINORZ
+CODE_SMELL
+~
+java:S1128"KRemove this unused import 'org.sonar.samples.java.utils.ClassCommentUtils'.(üÜ½8Â±œ…±0HÈéRMINORZ
+CODE_SMELL
+q	java:S106?"9Replace this use of System.out or System.err by a logger.(©şêÜúÿÿÿÿ8ÆÂÈ„±0H˜éRMAJORZ
+CODE_SMELL
+l	java:S106;"9Replace this use of System.out or System.err by a logger.(ÁÉûÈ8ÆÂÈ„±0H—éRMAJORZ
+CODE_SMELL

@@ -1,0 +1,19 @@
+
+w	java:S112="FDefine and throw a dedicated exception instead of using a generic one.(¦æÞ©ûÿÿÿÿHâìRMAJORZ
+CODE_SMELL
+r	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(°‘ÁòHãìRMAJORZ
+CODE_SMELL
+†
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ëÅªÀHäìRMINORZ
+CODE_SMELL
+‹
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ò…ãçüÿÿÿÿHæìRMINORZ
+CODE_SMELL
+y	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ËàÁåHèìRMINORZ
+CODE_SMELL
+…
+java:S1450 "XRemove the "className" field and declare it as a local variable in the relevant methods.(Ô¸ñ¿HéìRMINORZ
+CODE_SMELL
+g
+java:S1118":Add a private constructor to hide the implicit public one.(ËàÁåHêìRMAJORZ
+CODE_SMELL

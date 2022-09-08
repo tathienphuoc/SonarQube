@@ -1,0 +1,18 @@
+
+l	java:S106K"9Replace this use of System.out or System.err by a logger.(¨Ô…‹8¸¹ÒÓ®0HíèRMAJORZ
+CODE_SMELL
+q	java:S106N"9Replace this use of System.out or System.err by a logger.(¬—ùõüÿÿÿÿ8¸¹ÒÓ®0HðèRMAJORZ
+CODE_SMELL
+n	java:S1259"<This block of commented-out lines of code should be removed.(ÑñÙ18Õ™š…±0H±éRMAJORZ
+CODE_SMELL
+q	java:S106R"9Replace this use of System.out or System.err by a logger.(©þêÜúÿÿÿÿ8Õ™š…±0H½éRMAJORZ
+CODE_SMELL
+€
+java:S1128"GRemove this unused import 'org.sonar.plugins.java.api.tree.MethodTree'.(Ô’¶ýÿÿÿÿ8Õ™š…±0H¾éRMINORZ
+CODE_SMELL
+‡
+java:S1128"NRemove this unused import 'org.sonar.samples.java.utils.ClassCommentUtils_bk'.(¶Ç¿©üÿÿÿÿ8Õ™š…±0HÀéRMINORZ
+CODE_SMELL
+€
+java:S1128"LRemove this unused import 'org.sonar.samples.java.utils.MethodCommentUtils'.(úÞôƒ8Õ™š…±0HÂéRMINORZ
+CODE_SMELL

@@ -1,0 +1,10 @@
+package org.sonar.samples.java;
+
+public class testRule {
+	public int sum(int a, int b) {
+		return a+b;
+	}
+	public int sumtes() {
+		return 10;
+	}
+}

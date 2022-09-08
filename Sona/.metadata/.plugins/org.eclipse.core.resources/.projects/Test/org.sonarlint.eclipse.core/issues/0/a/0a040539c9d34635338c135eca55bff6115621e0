@@ -1,0 +1,59 @@
+
+Y
+java:S1166"%Either log or rethrow this exception.(ıàÑÎ8·Àòù«0HÜµRMAJORZ
+CODE_SMELL
+€$OPUS-RULE-JAVA:CheckClassCommentRule"+[R4J][Class comment] Missing class comments(è»ÖÚøÿÿÿÿ8£Ç¼°ª0HİµRBLOCKERZ
+CODE_SMELL
+z
+java:S1106"AMove this left curly brace to the beginning of next line of code.(¡»¢üùÿÿÿÿ8£Ç¼°ª0HŞµRMINORZ
+CODE_SMELL
+¸
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(²¿Ÿ¿8õû•«0HßµRCRITICALZ
+CODE_SMELL
+j
+java:S1135"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ8·Àòù«0HáµRINFOZ
+CODE_SMELL
+u
+java:S1106"AMove this left curly brace to the beginning of next line of code.(ıàÑÎ8·Àòù«0HâµRMINORZ
+CODE_SMELL
+„
+java:S1128"KRemove this unused import 'java.nio.file.attribute.FileStoreAttributeView'.(ÆÕŒ¾şÿÿÿÿ8û•«0HãµRMINORZ
+CODE_SMELL
+R	java:S113"'Add a new line at the end of this file.8£Ç¼°ª0HåµRMINORZ
+CODE_SMELL
+z
+java:S2133"ARemove this object instantiation and use "HashMap.class" instead.(—Ë®‡şÿÿÿÿ8„Ñöù«0HæµRMAJORZ
+CODE_SMELL
+d
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8û•«0HçµRMINORZ
+CODE_SMELL
+d
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8û•«0HéµRMINORZ
+CODE_SMELL
+z
+java:S1106"AMove this left curly brace to the beginning of next line of code.(è»ÖÚøÿÿÿÿ8£Ç¼°ª0HëµRMINORZ
+CODE_SMELL
+T
+java:S1451"&Add or update the header of this file.8£Ç¼°ª0HìµRBLOCKERZ
+CODE_SMELL
+‚%OPUS-RULE-JAVA:CheckMethodCommentRule",WARNING: Not support. Can't handle this case(òº‘ïûÿÿÿÿ8›Ç «0HíµRBLOCKERZ
+CODE_SMELL
+f
+java:S1108"2Move this "catch" keyword to a new dedicated line.(ıàÑÎ8·Àòù«0HîµRMINORZ
+CODE_SMELL
+p	java:S105"EReplace all tab characters in this file by sequences of white-spaces.8£Ç¼°ª0HïµRMINORZ
+CODE_SMELL
+}#OPUS-RULE-JAVA:CheckFileCommentRule")[R4J][File comment] Missing file comments(è»ÖÚøÿÿÿÿ8ó×”«0HğµRBLOCKERZ
+CODE_SMELL
+u
+java:S1106"AMove this left curly brace to the beginning of next line of code.(²¿Ÿ¿8·Àòù«0HñµRMINORZ
+CODE_SMELL
+q	java:S106"9Replace this use of System.out or System.err by a logger.(Ë£Õ¯ùÿÿÿÿ8„Ñöù«0HòµRMAJORZ
+CODE_SMELL
+~%OPUS-RULE-JAVA:CheckMethodCommentRule"-[R4J][Method comment] Missing method comments(Çµí‘8·Àòù«0HóµRBLOCKERZ
+CODE_SMELL
+u
+java:S1106"AMove this left curly brace to the beginning of next line of code.(Çµí‘8·Àòù«0HôµRMINORZ
+CODE_SMELL
+l	java:S106"9Replace this use of System.out or System.err by a logger.(÷ïê’8·Àòù«0HõµRMAJORZ
+CODE_SMELL

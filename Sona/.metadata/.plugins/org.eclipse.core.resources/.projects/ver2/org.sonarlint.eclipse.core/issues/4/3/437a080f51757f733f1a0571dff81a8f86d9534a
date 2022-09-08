@@ -1,0 +1,16 @@
+
+r	java:S112y"FDefine and throw a dedicated exception instead of using a generic one.(Öôå©H–ÍRMAJORZ
+CODE_SMELL
+y	java:S101 "MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ÿ§ßïH—ÍRMINORZ
+CODE_SMELL
+r	java:S112v"FDefine and throw a dedicated exception instead of using a generic one.(Ïª†ΩH“ÍRMAJORZ
+CODE_SMELL
+y
+java:S5850#"TGroup parts of the regex together to make the intended operator precedence explicit.(€éç(H”ÍRMAJORZBUG
+r	java:S112{"FDefine and throw a dedicated exception instead of using a generic one.(Î©˛ÌH‘ÍRMAJORZ
+CODE_SMELL
+W
+java:S5411Q"*Use the primitive boolean expression here.(òÖÒ¿H’ÍRMINORZ
+CODE_SMELL
+s	java:S112Å"FDefine and throw a dedicated exception instead of using a generic one.(†Ã”›HÿÍRMAJORZ
+CODE_SMELL

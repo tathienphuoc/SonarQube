@@ -1,0 +1,16 @@
+
+x	java:S112…"FDefine and throw a dedicated exception instead of using a generic one.(ÏòşùÿÿÿÿH¹šRMAJORZ
+CODE_SMELL
+w	java:S112}"FDefine and throw a dedicated exception instead of using a generic one.(¡¶ãıÿÿÿÿHºšRMAJORZ
+CODE_SMELL
+r	java:S112z"FDefine and throw a dedicated exception instead of using a generic one.(ì» ½H»šRMAJORZ
+CODE_SMELL
+~
+java:S5998&"LRefactor this repetition that can lead to a stack overflow for large inputs.(‚ºŒîûÿÿÿÿ8´…„«0H¼šRMAJORZBUG
+w	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(·±¯™ıÿÿÿÿH½šRMAJORZ
+CODE_SMELL
+W
+java:S5411U"*Use the primitive boolean expression here.(˜…ñÀH¾šRMINORZ
+CODE_SMELL
+z
+java:S5850*"TGroup parts of the regex together to make the intended operator precedence explicit.( İæÏHÁšRMAJORZBUG
