@@ -1,5 +1,0 @@
-class MyClass {
-	public EventResponse performxx() throws EventException {
-		return eventResponse;
-	}
-}
