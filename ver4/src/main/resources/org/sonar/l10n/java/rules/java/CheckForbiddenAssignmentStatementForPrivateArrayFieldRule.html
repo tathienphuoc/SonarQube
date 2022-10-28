@@ -1,0 +1,25 @@
+<h1>Check Forbidden Assignment Statement For Private Array Field Rule</h1>
+<h2>Noncompliant Code Example</h2>
+<pre>
+public class ExampleEvent {
+	private ExampleVO[] exampleVOs;
+	
+	public ExampleVO[] getExampleVOs() { //Noncompliant
+		return this.exampleVOs;
+	}
+	
+	public void setExampleVOs(ExampleVO[] exampleVOs) { //Noncompliant
+		this.exampleVOs = exampleVOs;
+	}
+}
+
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+public class ExampleEvent {
+	private ExampleVO[] exampleVOs;
+	
+	//Remove get and set for exampleVOs variable
+}
+</pre>
+<p style="color: red">Note: Don't get and set the array directly.</p>
