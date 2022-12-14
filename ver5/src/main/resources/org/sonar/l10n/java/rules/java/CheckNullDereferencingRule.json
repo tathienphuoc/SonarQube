@@ -1,0 +1,13 @@
+{
+	"title": "Null Dereferencing ",
+	"type": "CODE_SMELL",
+	"status": "ready",
+	"remediation": {
+		"func": "Constant\/Issue",
+		"constantCost": "5min"
+	},
+	"tags": [
+		"example"
+	],
+	"defaultSeverity": "blocker"
+}

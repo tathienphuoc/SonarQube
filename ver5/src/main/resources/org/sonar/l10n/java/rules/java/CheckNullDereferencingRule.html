@@ -1,0 +1,20 @@
+<h1>This rule detects Null Dereferencing</h1>
+<h2>Noncompliant Code Example</h2>
+
+<pre>
+	public boolean isNameEmpty(String name) {
+		return name.length() == 0; // If the name variable is null. It will cause NullPointerException.
+	}
+</pre>
+
+<h2>Compliant Solution</h2>
+
+<pre>
+	public boolean isNameEmpty(){
+		if(name==null) {
+			//TO DO
+		}else {			
+			return name.length() == 0;
+		}
+	}
+</pre>
